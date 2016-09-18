@@ -1,5 +1,7 @@
 package ua.kpi.leshchenko.dao;
 
+import java.util.ArrayList;
+
 import ua.kpi.leshchenko.beans.Game;
 
 public interface GameDAO {
@@ -11,5 +13,7 @@ public interface GameDAO {
 	public boolean update(Game game);
 
 	public boolean delete(int id);
+
+	public ArrayList<Game> findAll();
 
 }
