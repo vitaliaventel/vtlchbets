@@ -6,20 +6,20 @@ import ua.kpi.leshchenko.beans.Event;
 
 public interface EventDAO {
 
-	public boolean create(Event event);
+	boolean create(Event event);
 
-	public Event read(int id);
+	Event read(int id);
 
-	public boolean update(Event event);
+	boolean update(Event event);
 
-	public boolean delete(int id);
+	boolean delete(int id);
 
-	public ArrayList<Event> findByTeam(String team);
+	ArrayList<Event> findByTeam(String team);
 
-	public ArrayList<Event> findAll();
+	ArrayList<Event> findAll();
 
-	public ArrayList<Event> findByResult(String result);
+	ArrayList<Event> findByResult(String result);
 
-	public ArrayList<Event> findByGametype(int gameType);
+	ArrayList<Event> findByGametype(int gameType);
 
 }

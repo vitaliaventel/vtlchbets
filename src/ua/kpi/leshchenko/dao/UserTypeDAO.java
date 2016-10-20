@@ -6,14 +6,14 @@ import ua.kpi.leshchenko.beans.UserType;
 
 public interface UserTypeDAO {
 
-	public boolean create(UserType type);
+	boolean create(UserType type);
 
-	public UserType read(int id);
+	UserType read(int id);
 
-	public boolean update(UserType type);
+	boolean update(UserType type);
 
-	public boolean delete(int id);
+	boolean delete(int id);
 	
-	public ArrayList<UserType> findAll();
+	ArrayList<UserType> findAll();
 
 }

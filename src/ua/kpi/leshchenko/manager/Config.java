@@ -12,6 +12,7 @@ public class Config {
 	public static final String DB_PASSWORD = "DB_PASSWORD";
 	public static final String URL = "URL";
 	public static final String CONNECTION_POOL_SIZE = "CONNECTION_POOL_SIZE";
+	public static final String MAIN = "MAIN";
 
 	public static Config getInstance() {
 		if (instance == null) {

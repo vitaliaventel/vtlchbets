@@ -5,22 +5,22 @@ import ua.kpi.leshchenko.beans.User;
 
 public interface UserDAO {
 
-	public boolean create(User user);
+	boolean create(User user);
 
-	public User read(int id);
+	User read(int id);
 
-	public boolean update(User user);
+	boolean update(User user);
 
-	public boolean delete(int id);
+	boolean delete(int id);
 
-	public boolean find(String email, String password);
+	boolean find(String email, String password);
 
-	public ArrayList<User> findAll();
+	ArrayList<User> findAll();
 
-	public User findByEmail(String email);
+	User findByEmail(String email);
 
-	public ArrayList<User> findByUsertype(int userType);
+	ArrayList<User> findByUsertype(int userType);
 
-	public ArrayList<User> findByBalance();
+	ArrayList<User> findByBalance();
 
 }
