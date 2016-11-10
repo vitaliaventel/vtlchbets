@@ -12,11 +12,11 @@
 </head>
 <body>
 
-	<jsp:include page="headerstart.jsp"></jsp:include>
+	<jsp:include page="header.jsp"></jsp:include>
 	
 	<div class="jumbotron">
 		<div class="container">
-			<h1>MAIN NO LOGGED!</h1>
+			<h1>MAIN LOGGED!</h1>
 			<p>This is a template for a simple marketing or informational
 				website. It includes a large callout called a jumbotron and three
 				supporting pieces of content. Use it as a starting point to create
