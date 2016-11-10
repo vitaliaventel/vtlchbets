@@ -6,7 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
+import ua.kpi.leshchenko.commands.CommandLogin;
+import ua.kpi.leshchenko.commands.CommandLogout;
 import ua.kpi.leshchenko.commands.CommandMissing;
+import ua.kpi.leshchenko.commands.CommandSignUp;
+import ua.kpi.leshchenko.commands.CommandToSignUp;
 import ua.kpi.leshchenko.commands.ICommand;
 
 public class CHelper {
@@ -16,7 +20,10 @@ public class CHelper {
 	private HashMap<String, ICommand> commands = new HashMap<String, ICommand>();
 
 	private CHelper() {
-
+		commands.put("signin", new CommandLogin());
+		commands.put("signup", new CommandSignUp());
+		commands.put("logout", new CommandLogout());
+		commands.put("tosignup", new CommandToSignUp());
 	}
 
 	public ICommand getCommand(HttpServletRequest request) {
