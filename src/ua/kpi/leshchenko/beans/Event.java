@@ -10,6 +10,8 @@ public class Event implements Serializable {
 	private String result;
 	private int gameType;
 	private String gameName;
+	private double teamValue1;
+	private double teamValue2;
 
 	public Event() {
 
@@ -43,6 +45,22 @@ public class Event implements Serializable {
 		return result;
 	}
 
+	public double getTeamValue1() {
+		return teamValue1;
+	}
+
+	public void setTeamValue1(double teamValue1) {
+		this.teamValue1 = teamValue1;
+	}
+
+	public double getTeamValue2() {
+		return teamValue2;
+	}
+
+	public void setTeamValue2(double teamValue2) {
+		this.teamValue2 = teamValue2;
+	}
+
 	public void setResult(String result) {
 		this.result = result;
 	}
@@ -63,6 +81,8 @@ public class Event implements Serializable {
 		this.gameName = gameName;
 	}
 
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -73,6 +93,11 @@ public class Event implements Serializable {
 		result = prime * result + ((this.result == null) ? 0 : this.result.hashCode());
 		result = prime * result + ((team1 == null) ? 0 : team1.hashCode());
 		result = prime * result + ((team2 == null) ? 0 : team2.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(teamValue1);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(teamValue2);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
@@ -109,6 +134,10 @@ public class Event implements Serializable {
 				return false;
 		} else if (!team2.equals(other.team2))
 			return false;
+		if (Double.doubleToLongBits(teamValue1) != Double.doubleToLongBits(other.teamValue1))
+			return false;
+		if (Double.doubleToLongBits(teamValue2) != Double.doubleToLongBits(other.teamValue2))
+			return false;
 		return true;
 	}
 
@@ -120,6 +149,8 @@ public class Event implements Serializable {
 		sb.append(", team2=").append(team2);
 		sb.append(", result=").append(result);
 		sb.append(", gameName=").append(gameName);
+		sb.append(", teamValue1=").append(teamValue1);
+		sb.append(", teamValue2=").append(teamValue2);
 		sb.append("]");
 		return sb.toString();
 	}

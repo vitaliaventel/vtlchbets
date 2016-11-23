@@ -8,9 +8,18 @@ public class Bet implements Serializable {
 	private int event;
 	private int user;
 	private String winner;
+	private double betValue;
 
 	public Bet() {
 
+	}
+
+	public double getBetValue() {
+		return betValue;
+	}
+
+	public void setBetValue(double betValue) {
+		this.betValue = betValue;
 	}
 
 	public int getIdBet() {
@@ -49,6 +58,9 @@ public class Bet implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(betValue);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + event;
 		result = prime * result + idBet;
 		result = prime * result + user;
@@ -65,6 +77,8 @@ public class Bet implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Bet other = (Bet) obj;
+		if (Double.doubleToLongBits(betValue) != Double.doubleToLongBits(other.betValue))
+			return false;
 		if (event != other.event)
 			return false;
 		if (idBet != other.idBet)
@@ -86,6 +100,7 @@ public class Bet implements Serializable {
 		sb.append(", event=").append(event);
 		sb.append(", user=").append(user);
 		sb.append(", winner=").append(winner);
+		sb.append(", betValue=").append(betValue);
 		sb.append("]");
 		return sb.toString();
 	}
