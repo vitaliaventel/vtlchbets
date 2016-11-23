@@ -16,9 +16,9 @@ import ua.kpi.leshchenko.connection.Database;
 public class BetDAOImpl implements BetDAO {
 
 	private static Logger logger = Logger.getLogger(BetDAOImpl.class.getName());
-	private final String sqlCreate = "INSERT INTO mydb.bets(event,user,winner) VALUES(?,?,?)";
+	private final String sqlCreate = "INSERT INTO mydb.bets(event,user,winner,betvalue) VALUES(?,?,?,?)";
 	private final String sqlRead = "SELECT * FROM mydb.bets WHERE idbets = ";
-	private final String sqlUpdate = "UPDATE mydb.bets SET event=?, user=?, winner=? WHERE idbets=?";
+	private final String sqlUpdate = "UPDATE mydb.bets SET event=?, user=?, winner=?, betvalue=? WHERE idbets=?";
 	private final String sqlDelete = "DELETE FROM mydb.bets WHERE idbets=";
 	private Database db;
 
@@ -33,6 +33,7 @@ public class BetDAOImpl implements BetDAO {
 			ps.setInt(1, bet.getEvent());
 			ps.setInt(2, bet.getUser());
 			ps.setString(3, bet.getWinner());
+			ps.setDouble(4, bet.getBetValue());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("DB problems create() ", e);
@@ -54,6 +55,7 @@ public class BetDAOImpl implements BetDAO {
 				bet.setEvent(rs.getInt("event"));
 				bet.setUser(rs.getInt("user"));
 				bet.setWinner(rs.getString("winner"));
+				bet.setBetValue(rs.getDouble("betvalue"));
 			}
 		} catch (SQLException e) {
 			logger.error("DB problems read() ", e);
@@ -72,7 +74,8 @@ public class BetDAOImpl implements BetDAO {
 			ps.setInt(1, bet.getEvent());
 			ps.setInt(2, bet.getUser());
 			ps.setString(3, bet.getWinner());
-			ps.setInt(4, bet.getIdBet());
+			ps.setDouble(4, bet.getBetValue());
+			ps.setInt(5, bet.getIdBet());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("DB problem update() ", e);
@@ -110,6 +113,7 @@ public class BetDAOImpl implements BetDAO {
 				bet.setEvent(rs.getInt("event"));
 				bet.setUser(rs.getInt("user"));
 				bet.setWinner(rs.getString("winner"));
+				bet.setBetValue(rs.getDouble("betvalue"));
 				betList.add(bet);
 			}
 		} catch (Exception e) {
@@ -133,6 +137,7 @@ public class BetDAOImpl implements BetDAO {
 				bet.setEvent(rs.getInt("event"));
 				bet.setUser(rs.getInt("user"));
 				bet.setWinner(rs.getString("winner"));
+				bet.setBetValue(rs.getDouble("betvalue"));
 				betList.add(bet);
 			}
 		} catch (Exception e) {
@@ -156,6 +161,7 @@ public class BetDAOImpl implements BetDAO {
 				bet.setEvent(rs.getInt("event"));
 				bet.setUser(rs.getInt("user"));
 				bet.setWinner(rs.getString("winner"));
+				bet.setBetValue(rs.getDouble("betvalue"));
 				betList.add(bet);
 			}
 		} catch (Exception e) {

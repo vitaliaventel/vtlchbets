@@ -17,7 +17,7 @@ public class EventDAOImpl implements EventDAO {
 	private static Logger logger = Logger.getLogger(EventDAOImpl.class.getName());
 	private final String sqlCreate = "INSERT INTO mydb.event(team1,team2,result,game) VALUES(?,?,?,?)";
 	private final String sqlRead = "SELECT * FROM mydb.event WHERE idevent = ";
-	private final String sqlUpdate = "UPDATE mydb.event SET team1=?, team2=?, result=?, game=? WHERE idevent=?";
+	private final String sqlUpdate = "UPDATE mydb.event SET team1=?, team2=?, result=?, game=?, team1value=?, team2value=? WHERE idevent=?";
 	private final String sqlDelete = "DELETE FROM mydb.event WHERE idevent=";
 	private Database db;
 
@@ -55,6 +55,8 @@ public class EventDAOImpl implements EventDAO {
 				event.setTeam2(rs.getString("team2"));
 				event.setResult(rs.getString("result"));
 				event.setGameType(rs.getInt("game"));
+				event.setTeamValue1(rs.getDouble("team1value"));
+				event.setTeamValue2(rs.getDouble("team2value"));
 			}
 		} catch (SQLException e) {
 			logger.error("DB problems read() ", e);
@@ -74,7 +76,9 @@ public class EventDAOImpl implements EventDAO {
 			ps.setString(2, event.getTeam2());
 			ps.setString(3, event.getResult());
 			ps.setInt(4, event.getGameType());
-			ps.setInt(5, event.getIdEvent());
+			ps.setDouble(5, event.getTeamValue1());
+			ps.setDouble(6, event.getTeamValue2());
+			ps.setInt(7, event.getIdEvent());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("DB problem update() ", e);
@@ -116,6 +120,8 @@ public class EventDAOImpl implements EventDAO {
 				ev.setTeam2(rs.getString("team2"));
 				ev.setResult(rs.getString("result"));
 				ev.setGameType(rs.getInt("game"));
+				ev.setTeamValue1(rs.getDouble("team1value"));
+				ev.setTeamValue2(rs.getDouble("team2value"));
 				eventList.add(ev);
 			}
 		} catch (Exception e) {
@@ -133,7 +139,7 @@ public class EventDAOImpl implements EventDAO {
 		ArrayList<Event> eventList = new ArrayList<>();
 		Connection conn = db.getConn();
 		try (ResultSet rs = conn.createStatement().executeQuery(
-				"SELECT idevent,team1,team2,result,game,name FROM mydb.event JOIN mydb.game WHERE event.game = game.idgame")) {
+				"SELECT idevent,team1,team2,result,game,name,team1value,team2value FROM mydb.event JOIN mydb.game WHERE event.game = game.idgame")) {
 			while (rs.next()) {
 				Event ev = new Event();
 				ev.setIdEvent(rs.getInt("idevent"));
@@ -142,6 +148,8 @@ public class EventDAOImpl implements EventDAO {
 				ev.setResult(rs.getString("result"));
 				ev.setGameType(rs.getInt("game"));
 				ev.setGameName(rs.getString("name"));
+				ev.setTeamValue1(rs.getDouble("team1value"));
+				ev.setTeamValue2(rs.getDouble("team2value"));
 				eventList.add(ev);
 			}
 		} catch (Exception e) {
@@ -155,12 +163,10 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 	@Override
-	public ArrayList<Event> findByResult(String result) {
+	public ArrayList<Event> findNotFinished() {
 		ArrayList<Event> eventList = new ArrayList<>();
 		Connection conn = db.getConn();
-		try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM mydb.event WHERE result = ?")) {
-			ps.setString(1, result);
-			ResultSet rs = ps.executeQuery();
+		try (ResultSet rs = conn.createStatement().executeQuery("SELECT idevent,team1,team2,result,game,name,team1value,team2value FROM mydb.event JOIN mydb.game WHERE event.game = game.idgame AND result IS NULL")) {
 			while (rs.next()) {
 				Event ev = new Event();
 				ev.setIdEvent(rs.getInt("idevent"));
@@ -168,6 +174,36 @@ public class EventDAOImpl implements EventDAO {
 				ev.setTeam2(rs.getString("team2"));
 				ev.setResult(rs.getString("result"));
 				ev.setGameType(rs.getInt("game"));
+				ev.setGameName(rs.getString("name"));
+				ev.setTeamValue1(rs.getDouble("team1value"));
+				ev.setTeamValue2(rs.getDouble("team2value"));
+				eventList.add(ev);
+			}
+		} catch (Exception e) {
+			logger.error("EventDAO.findByResult() problems.");
+			return null;
+		} finally {
+			db.returnConnectionToPool(conn);
+		}
+		logger.info("EventDAO.findByResult() is ok.");
+		return eventList;
+	}
+	
+	@Override
+	public ArrayList<Event> findFinished() {
+		ArrayList<Event> eventList = new ArrayList<>();
+		Connection conn = db.getConn();
+		try (ResultSet rs = conn.createStatement().executeQuery("SELECT idevent,team1,team2,result,game,name,team1value,team2value FROM mydb.event JOIN mydb.game WHERE event.game = game.idgame AND result IS NOT NULL")) {
+			while (rs.next()) {
+				Event ev = new Event();
+				ev.setIdEvent(rs.getInt("idevent"));
+				ev.setTeam1(rs.getString("team1"));
+				ev.setTeam2(rs.getString("team2"));
+				ev.setResult(rs.getString("result"));
+				ev.setGameType(rs.getInt("game"));
+				ev.setGameName(rs.getString("name"));
+				ev.setTeamValue1(rs.getDouble("team1value"));
+				ev.setTeamValue2(rs.getDouble("team2value"));
 				eventList.add(ev);
 			}
 		} catch (Exception e) {
@@ -192,6 +228,8 @@ public class EventDAOImpl implements EventDAO {
 				ev.setTeam2(rs.getString("team2"));
 				ev.setResult(rs.getString("result"));
 				ev.setGameType(rs.getInt("game"));
+				ev.setTeamValue1(rs.getDouble("team1value"));
+				ev.setTeamValue2(rs.getDouble("team2value"));
 				eventList.add(ev);
 			}
 		} catch (Exception e) {

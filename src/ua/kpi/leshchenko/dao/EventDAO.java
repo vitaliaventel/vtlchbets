@@ -18,7 +18,9 @@ public interface EventDAO {
 
 	ArrayList<Event> findAll();
 
-	ArrayList<Event> findByResult(String result);
+	ArrayList<Event> findNotFinished();
+
+	ArrayList<Event> findFinished();
 
 	ArrayList<Event> findByGametype(int gameType);
 
