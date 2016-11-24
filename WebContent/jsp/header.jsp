@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; UTF-8">
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -31,7 +31,7 @@
 				  <input type="hidden" name="command" value = "menu"/>
 				  <button type="submit" name="buttonName" value="home" class="btn btn-default"><span class="glyphicon glyphicon-home"></span>Home</button>
 				  <button type="submit" name="buttonName" value="profile" class="btn btn-default"><span class="glyphicon glyphicon-user"></span>Profile</button>
-      			  <button type="submit" name="buttonName" value="moder" class="btn btn-default"><span class="glyphicon glyphicon-user"></span>Moderator page</button>
+      			  <button type="submit" name="buttonName" value="moder" class="btn btn-default"><span class="glyphicon glyphicon-sunglasses"></span>Moderator page</button>
       			  <button type="submit" name="buttonName" value="hall" class="btn btn-default"><span class="glyphicon glyphicon-tower"></span>Hall of Fame</button>
       			  <button type="submit" name="buttonName" value="about" class="btn btn-default"><span class="glyphicon glyphicon-info-sign"></span>About</button>
     		  </form>
@@ -41,7 +41,7 @@
 				  <input type="hidden" name="command" value = "menu"/>
 				  <button type="submit" name="buttonName" value="home" class="btn btn-default"><span class="glyphicon glyphicon-home"></span>Home</button>
 				  <button type="submit" name="buttonName" value="profile" class="btn btn-default"><span class="glyphicon glyphicon-user"></span>Profile</button>
-      			  <button type="submit" name="buttonName" value="admin" class="btn btn-default"><span class="glyphicon glyphicon-user"></span>Administrator page</button>
+      			  <button type="submit" name="buttonName" value="admin" class="btn btn-default"><span class="glyphicon glyphicon-wrench"></span>Administrator page</button>
       			  <button type="submit" name="buttonName" value="hall" class="btn btn-default"><span class="glyphicon glyphicon-tower"></span>Hall of Fame</button>
       			  <button type="submit" name="buttonName" value="about" class="btn btn-default"><span class="glyphicon glyphicon-info-sign"></span>About</button>
     		  </form>

@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link href="css/jumbotron.css" rel="stylesheet">
 <script src="js/jquery-3.1.1.min.js"></script>
@@ -25,7 +25,7 @@
 	
 	<div class="jumbotron">
 		<div class="container">
-			<h1>HALL OF FAME</h1>
+			<center><h1>HALL OF FAME</h1></center>
 			<div class="panel panel-info">
 				<div class="panel-heading">TOP 10 VTLCH BETS USERS</div>
 				<table class="table table-hover">
