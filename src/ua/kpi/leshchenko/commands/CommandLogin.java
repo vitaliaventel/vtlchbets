@@ -20,9 +20,6 @@ public class CommandLogin implements ICommand {
 	private UserDAO daoUsers = DAOFactory.createUserDAO();
 	private static final String EMAIL = "email";
 	private static final String PASSWORD = "password";
-	private static final int USERTYPE = 1;
-	private static final int MODERTYPE = 2;
-	private static final int ADMINTYPE = 3;
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse responce)
@@ -34,25 +31,12 @@ public class CommandLogin implements ICommand {
 		try {
 			if (daoUsers.find(email, password)) {
 				User user = daoUsers.findByEmail(email);
-				if (user.getUserType() == MODERTYPE) {
 					request.getSession(false).setAttribute("name", user.getFirstName());
+					request.getSession(false).setAttribute(EMAIL, email);
 					request.getSession(false).setAttribute("balance", user.getBalance());
-					
-					page = Config.getInstance().getProperty(Config.MAINLOGGED);
-					logger.info("This is moderator.");
-				} else if (user.getUserType() == ADMINTYPE) {
-					request.getSession(false).setAttribute("name", user.getFirstName());
-					request.getSession(false).setAttribute("balance", user.getBalance());
-					
-					page = Config.getInstance().getProperty(Config.MAINLOGGED);
-					logger.info("This is administrator");
-				} else if (user.getUserType() == USERTYPE) {
-					request.getSession(false).setAttribute("name", user.getFirstName());
-					request.getSession(false).setAttribute("balance", user.getBalance());
-					
+					request.getSession(false).setAttribute("type", user.getUserType());
 					page = Config.getInstance().getProperty(Config.MAINLOGGED);
 					logger.info("Correct login/password!");
-				}
 			} else {
 				//request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.LOGIN_ERROR));
 				page = Config.getInstance().getProperty(Config.ERRORPAGE);

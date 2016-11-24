@@ -43,7 +43,8 @@ public class CommandSignUp implements ICommand {
 			if (daoUsers.create(user)) {
 				request.getSession(false).setAttribute("name", user.getFirstName());
 				request.getSession(false).setAttribute("balance", user.getBalance());
-				//request.getSession(false).setAttribute("toursList", daoTours.findAll());
+				request.getSession(false).setAttribute(EMAIL, user.getEmail());
+				request.getSession(false).setAttribute("type", user.getUserType());
 				page = Config.getInstance().getProperty(Config.MAINLOGGED);
 				logger.info("Register new user.");
 			} else {
