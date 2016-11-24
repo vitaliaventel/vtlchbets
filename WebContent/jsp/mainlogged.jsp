@@ -9,21 +9,25 @@
 <link href="css/jumbotron.css" rel="stylesheet">
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<script>
+	function info(id){
+		document.acceptBet.id.value=id;
+	}
+</script>
 <title>VTLCHBets main page</title>
 </head>
 <body>
 
 	<jsp:include page="header.jsp"></jsp:include>
-
 	<div class="jumbotron">
 		<div class="container">
 			<h1>VTLCH eSport bets</h1>
-			<div class="panel panel-default">
+			<div class="panel panel-success">
 				<div class="panel-heading">UPCOMING EVENTS</div>
 				<table class="table table-hover">
 					<thead>
 						<tr>
+							<th>Match ID</th>
 							<th>Game</th>
 							<th>Team 1</th>
 							<th>Value</th>
@@ -34,7 +38,8 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${applicationScope.eventListUp}" var="event">
-							<tr class="span4 proj-div" data-toggle="modal" data-target="#betModal">
+							<tr onclick="info(${event.idEvent})" data-toggle="modal" data-target="#betModal">
+								<td><c:out value="${event.idEvent}" /></td>
 								<td><c:out value="${event.gameName}" /></td>
 								<td><c:out value="${event.team1}" /></td>
 								<td><c:out value="${event.teamValue1}" /></td>
@@ -56,32 +61,33 @@
 							<h4 class="modal-title">Bet for user, ${name}</h4>
 						</div>
 						<div class="modal-body">
-							ASDSADDSADASDSAASD:D:SADLSADLDSALALDS
+							Do your bet for match id:
 							<form name="acceptBet" method="POST" action="Controller">
 								<input type="hidden" name="command" value="acceptBet" />
 								<input type="text" name="id" value="" readonly/> 
+								<hr>
 								<label class="radio-inline">
-									<input type="radio" name="winner"> team1</label> 
+									<input type="radio" name="winner" value="team1" required> team1</label> 
 								<label class="radio-inline">
-									<input type="radio" name="winner">team2</label>
-								<input type="input" name="betValue" placeholder="Bet value" required>
+									<input type="radio" name="winner" value="team2" required>team2</label>
+								<input type="number" name="betValue" min="0.1" max=${balance} step="0.1" placeholder="Bet value" required>
 								<button class="btn btn-sm btn-primary" type="submit">Accept</button>
 							</form>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
 					</div>
 
 				</div>
 			</div>
 
-			<div class="panel panel-default">
+			<div class="panel panel-danger">
 				<div class="panel-heading">FINISHED EVENTS</div>
 				<table class="table table-hover">
 					<thead>
 						<tr>
+							<th>Match ID</th>
 							<th>Game</th>
 							<th>Team 1</th>
 							<th>Value</th>
@@ -93,6 +99,7 @@
 					<tbody>
 						<c:forEach items="${applicationScope.eventListFinish}" var="event">
 							<tr>
+								<td><c:out value="${event.idEvent}" /></td>
 								<td><c:out value="${event.gameName}" /></td>
 								<td><c:out value="${event.team1}" /></td>
 								<td><c:out value="${event.teamValue1}" /></td>

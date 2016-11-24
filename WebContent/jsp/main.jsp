@@ -18,7 +18,7 @@
 	<div class="jumbotron">
 		<div class="container">
 			<h1>VTLCH eSport bets</h1>
-			<div class="panel panel-default">
+			<div class="panel panel-success">
 				<div class="panel-heading">UPCOMING EVENTS</div>
 				<table class="table table-hover">
 					<thead>
@@ -46,7 +46,7 @@
 				</table>
 			</div>
 			
-			<div class="panel panel-default">
+			<div class="panel panel-danger">
 				<div class="panel-heading">FINISHED EVENTS</div>
 				<table class="table table-hover">
 					<thead>

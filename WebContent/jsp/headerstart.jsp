@@ -19,8 +19,12 @@
 				<span class="icon-bar"></span> 
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">VTLCHBets</a> 
-			<a class="navbar-brand" href="#">About</a>
+ 			<form class="navbar-form navbar-left" name="menu" method="POST" action="Controller">
+				  <input type="hidden" name="command" value = "menu"/>
+				  <button type="submit" name="buttonName" value="home" class="btn btn-default"><span class="glyphicon glyphicon-home"></span>Home</button>
+      			  <button type="submit" name="buttonName" value="hall" class="btn btn-default"><span class="glyphicon glyphicon-tower"></span>Hall of Fame</button>
+      			  <button type="submit" name="buttonName" value="about" class="btn btn-default"><span class="glyphicon glyphicon-info-sign"></span>About</button>
+    		  </form>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<form class="navbar-form navbar-right" name="Signup" method="POST" action="Controller">

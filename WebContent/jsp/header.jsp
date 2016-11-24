@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,9 +17,35 @@
 				<span class="icon-bar"></span> 
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">VTLCHBets</a> 
-			<a class="navbar-brand" href="#">Profile</a>
-			<a class="navbar-brand" href="#">About</a>
+			<c:if test="${type=='1'}">
+			 <form class="navbar-form navbar-left" name="menu" method="POST" action="Controller">
+				  <input type="hidden" name="command" value = "menu"/>
+				  <button type="submit" name="buttonName" value="home" class="btn btn-default"><span class="glyphicon glyphicon-home"></span>Home</button>
+      			  <button type="submit" name="buttonName" value="profile" class="btn btn-default"><span class="glyphicon glyphicon-user"></span>Profile</button>
+      			  <button type="submit" name="buttonName" value="hall" class="btn btn-default"><span class="glyphicon glyphicon-tower"></span>Hall of Fame</button>
+      			  <button type="submit" name="buttonName" value="about" class="btn btn-default"><span class="glyphicon glyphicon-info-sign"></span>About</button>
+    		  </form>
+			</c:if>
+			<c:if test="${type=='2'}">
+							 <form class="navbar-form navbar-left" name="menu" method="POST" action="Controller">
+				  <input type="hidden" name="command" value = "menu"/>
+				  <button type="submit" name="buttonName" value="home" class="btn btn-default"><span class="glyphicon glyphicon-home"></span>Home</button>
+				  <button type="submit" name="buttonName" value="profile" class="btn btn-default"><span class="glyphicon glyphicon-user"></span>Profile</button>
+      			  <button type="submit" name="buttonName" value="moder" class="btn btn-default"><span class="glyphicon glyphicon-user"></span>Moderator page</button>
+      			  <button type="submit" name="buttonName" value="hall" class="btn btn-default"><span class="glyphicon glyphicon-tower"></span>Hall of Fame</button>
+      			  <button type="submit" name="buttonName" value="about" class="btn btn-default"><span class="glyphicon glyphicon-info-sign"></span>About</button>
+    		  </form>
+			</c:if>
+			<c:if test="${type=='3'}">
+					<form class="navbar-form navbar-left" name="menu" method="POST" action="Controller">
+				  <input type="hidden" name="command" value = "menu"/>
+				  <button type="submit" name="buttonName" value="home" class="btn btn-default"><span class="glyphicon glyphicon-home"></span>Home</button>
+				  <button type="submit" name="buttonName" value="profile" class="btn btn-default"><span class="glyphicon glyphicon-user"></span>Profile</button>
+      			  <button type="submit" name="buttonName" value="admin" class="btn btn-default"><span class="glyphicon glyphicon-user"></span>Administrator page</button>
+      			  <button type="submit" name="buttonName" value="hall" class="btn btn-default"><span class="glyphicon glyphicon-tower"></span>Hall of Fame</button>
+      			  <button type="submit" name="buttonName" value="about" class="btn btn-default"><span class="glyphicon glyphicon-info-sign"></span>About</button>
+    		  </form>
+			</c:if>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<form class="navbar-form navbar-right" name="Logout" method="POST" action="Controller">

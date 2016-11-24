@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-ADMIN JSP!
+MODERATOR JSP!
 </body>
 </html>
