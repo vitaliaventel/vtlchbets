@@ -19,6 +19,9 @@ public class Config {
 	public static final String ERRORPAGE = "ERRORPAGE";
 	public static final String ADMIN = "ADMIN";
 	public static final String MAINLOGGED = "MAINLOGGED";
+	public static final String MODER = "MODER";
+	public static final String HALLOFFAME = "HALLOFFAME";
+	
 
 	public static Config getInstance() {
 		if (instance == null) {

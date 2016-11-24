@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import ua.kpi.leshchenko.commands.ICommand;
 import ua.kpi.leshchenko.dao.DAOFactory;
 import ua.kpi.leshchenko.dao.EventDAO;
+import ua.kpi.leshchenko.dao.UserDAO;
 
 /**
  * Servlet implementation class Controller
@@ -23,6 +24,7 @@ public class Controller extends HttpServlet {
 	private CHelper helper = CHelper.getInstance();
 	private static Logger logger = Logger.getLogger(Controller.class.getName());
 	private EventDAO daoEvent = DAOFactory.createEventDAO();
+	private UserDAO daoUser = DAOFactory.createUserDAO();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -40,6 +42,7 @@ public class Controller extends HttpServlet {
 			page = command.execute(request, response);
 			context.setAttribute("eventListUp", daoEvent.findNotFinished());
 			context.setAttribute("eventListFinish", daoEvent.findFinished());
+			context.setAttribute("hallList", daoUser.findByBalance());
 		} catch (ServletException e) {;
 			logger.error("Servlet exception", e);
 		} catch (IOException e) {
