@@ -14,7 +14,9 @@ public interface BetDAO {
 
 	boolean delete(int id);
 
-	ArrayList<Bet> findByUser(int id);
+	ArrayList<Bet> findByUserFinished(int id);
+
+	ArrayList<Bet> findByUserUpcoming(int id);
 
 	ArrayList<Bet> findAll();
 

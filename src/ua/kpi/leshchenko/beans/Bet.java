@@ -9,6 +9,9 @@ public class Bet implements Serializable {
 	private int user;
 	private String winner;
 	private double betValue;
+	private String team1;
+	private String team2;
+	private String result;
 
 	public Bet() {
 
@@ -36,6 +39,30 @@ public class Bet implements Serializable {
 
 	public void setEvent(int event) {
 		this.event = event;
+	}
+
+	public String getTeam1() {
+		return team1;
+	}
+
+	public void setTeam1(String team1) {
+		this.team1 = team1;
+	}
+
+	public String getTeam2() {
+		return team2;
+	}
+
+	public void setTeam2(String team2) {
+		this.team2 = team2;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
 	}
 
 	public int getUser() {

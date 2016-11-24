@@ -103,17 +103,47 @@ public class BetDAOImpl implements BetDAO {
 	}
 
 	@Override
-	public ArrayList<Bet> findByUser(int id) {
+	public ArrayList<Bet> findByUserFinished(int id) {
 		ArrayList<Bet> betList = new ArrayList<>();
 		Connection conn = db.getConn();
-		try (ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM mydb.bets WHERE user=" + id)) {
+		try (ResultSet rs = conn.createStatement().executeQuery(
+				"SELECT idbets,betvalue,winner,team1,team2,result FROM mydb.bets JOIN mydb.event ON mydb.bets.event = mydb.event.idevent WHERE user="
+						+ id + " AND result IS NOT NULL")) {
 			while (rs.next()) {
 				Bet bet = new Bet();
 				bet.setIdBet(rs.getInt("idbets"));
-				bet.setEvent(rs.getInt("event"));
-				bet.setUser(rs.getInt("user"));
-				bet.setWinner(rs.getString("winner"));
 				bet.setBetValue(rs.getDouble("betvalue"));
+				bet.setWinner(rs.getString("winner"));
+				bet.setTeam1(rs.getString("team1"));
+				bet.setTeam2(rs.getString("team2"));
+				bet.setResult(rs.getString("result"));
+				betList.add(bet);
+			}
+		} catch (Exception e) {
+			logger.error("BetDAO.findByUser() problems.");
+			return null;
+		} finally {
+			db.returnConnectionToPool(conn);
+		}
+		logger.info("BetDAO.findByUser() is ok.");
+		return betList;
+	}
+
+	@Override
+	public ArrayList<Bet> findByUserUpcoming(int id) {
+		ArrayList<Bet> betList = new ArrayList<>();
+		Connection conn = db.getConn();
+		try (ResultSet rs = conn.createStatement().executeQuery(
+				"SELECT idbets,betvalue,winner,team1,team2,result FROM mydb.bets JOIN mydb.event ON mydb.bets.event = mydb.event.idevent WHERE user="
+						+ id + " AND result IS NULL")) {
+			while (rs.next()) {
+				Bet bet = new Bet();
+				bet.setIdBet(rs.getInt("idbets"));
+				bet.setBetValue(rs.getDouble("betvalue"));
+				bet.setWinner(rs.getString("winner"));
+				bet.setTeam1(rs.getString("team1"));
+				bet.setTeam2(rs.getString("team2"));
+				bet.setResult(rs.getString("result"));
 				betList.add(bet);
 			}
 		} catch (Exception e) {

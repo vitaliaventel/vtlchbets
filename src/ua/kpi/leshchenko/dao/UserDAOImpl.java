@@ -17,7 +17,7 @@ public class UserDAOImpl implements UserDAO {
 	private static Logger logger = Logger.getLogger(UserDAOImpl.class.getName());
 	private final String sqlCreate = "INSERT INTO mydb.users(firstname,lastname,email,password,balance,usertype) VALUES(?,?,?,?,?,?)";
 	private final String sqlRead = "SELECT * FROM mydb.users WHERE idUsers = ";
-	private final String sqlUpdate = "UPDATE mydb.users SET firstname=?, lastname=?, email=?, password=?, balance=?, usertype=? WHERE idUsers=?";
+	private final String sqlUpdate = "UPDATE mydb.users SET firstname=?, lastname=?, email=?, password=?, balance=?, usertype=? WHERE idusers=?";
 	private final String sqlDelete = "DELETE FROM mydb.users WHERE idUsers=";
 	private Database db;
 

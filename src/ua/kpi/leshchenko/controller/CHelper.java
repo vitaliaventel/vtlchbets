@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 
 import ua.kpi.leshchenko.commands.CommandAcceptBet;
+import ua.kpi.leshchenko.commands.CommandEditProfile;
 import ua.kpi.leshchenko.commands.CommandLogin;
 import ua.kpi.leshchenko.commands.CommandLogout;
 import ua.kpi.leshchenko.commands.CommandMenu;
@@ -28,6 +29,7 @@ public class CHelper {
 		commands.put("tosignup", new CommandToSignUp());
 		commands.put("acceptBet", new CommandAcceptBet());
 		commands.put("menu", new CommandMenu());
+		commands.put("editprofile", new CommandEditProfile());
 	}
 
 	public ICommand getCommand(HttpServletRequest request) {
