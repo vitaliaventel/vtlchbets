@@ -157,7 +157,7 @@ public class UserDAOImpl implements UserDAO {
 		User u = new User();
 		Connection conn = db.getConn();
 		try (PreparedStatement ps = conn.prepareStatement(
-				"SELECT IDUSERS, FIRSTNAME, LASTNAME, BALANCE, EMAIL, USERTYPE FROM mydb.users WHERE email = ?")) {
+				"SELECT * FROM mydb.users WHERE email = ?")) {
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -167,6 +167,7 @@ public class UserDAOImpl implements UserDAO {
 				u.setBalance(rs.getDouble("balance"));
 				u.setEmail(rs.getString("email"));
 				u.setUserType(rs.getInt("usertype"));
+				u.setPassword(rs.getString("password"));
 			}
 		} catch (Exception e) {
 			logger.error("UserDAO.findByEmail() problems.");
@@ -211,13 +212,15 @@ public class UserDAOImpl implements UserDAO {
 		Connection conn = db.getConn();
 		try (ResultSet rs = conn.createStatement()
 				.executeQuery("SELECT IDUSERS, FIRSTNAME, LASTNAME, BALANCE FROM mydb.users order by balance desc")) {
-			while (rs.next()) {
+			int numbs = 0;
+			while (rs.next() || numbs < 10) {
 				User u = new User();
 				u.setIdUser(rs.getInt("idUsers"));
 				u.setFirstName(rs.getString("firstname"));
 				u.setLastName(rs.getString("lastname"));
 				u.setBalance(rs.getDouble("balance"));
 				usersList.add(u);
+				numbs++;
 			}
 		} catch (Exception e) {
 			logger.error("UserDAO.findByBalance() problems.");

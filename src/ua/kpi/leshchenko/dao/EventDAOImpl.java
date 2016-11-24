@@ -180,12 +180,12 @@ public class EventDAOImpl implements EventDAO {
 				eventList.add(ev);
 			}
 		} catch (Exception e) {
-			logger.error("EventDAO.findByResult() problems.");
+			logger.error("EventDAO.findNotFinished() problems.");
 			return null;
 		} finally {
 			db.returnConnectionToPool(conn);
 		}
-		logger.info("EventDAO.findByResult() is ok.");
+		logger.info("EventDAO.findNotFinished() is ok.");
 		return eventList;
 	}
 	
@@ -207,12 +207,12 @@ public class EventDAOImpl implements EventDAO {
 				eventList.add(ev);
 			}
 		} catch (Exception e) {
-			logger.error("EventDAO.findByResult() problems.");
+			logger.error("EventDAO.findFinished() problems.");
 			return null;
 		} finally {
 			db.returnConnectionToPool(conn);
 		}
-		logger.info("EventDAO.findByResult() is ok.");
+		logger.info("EventDAO.findFinished() is ok.");
 		return eventList;
 	}
 
