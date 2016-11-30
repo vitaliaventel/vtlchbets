@@ -211,16 +211,14 @@ public class UserDAOImpl implements UserDAO {
 		ArrayList<User> usersList = new ArrayList<>();
 		Connection conn = db.getConn();
 		try (ResultSet rs = conn.createStatement()
-				.executeQuery("SELECT IDUSERS, FIRSTNAME, LASTNAME, BALANCE FROM mydb.users order by balance desc")) {
-			int numbs = 0;
-			while (rs.next() || numbs < 10) {
+				.executeQuery("SELECT IDUSERS, FIRSTNAME, LASTNAME, BALANCE FROM mydb.users order by balance desc limit 10")) {
+			while (rs.next()) {
 				User u = new User();
 				u.setIdUser(rs.getInt("idUsers"));
 				u.setFirstName(rs.getString("firstname"));
 				u.setLastName(rs.getString("lastname"));
 				u.setBalance(rs.getDouble("balance"));
 				usersList.add(u);
-				numbs++;
 			}
 		} catch (Exception e) {
 			logger.error("UserDAO.findByBalance() problems.");

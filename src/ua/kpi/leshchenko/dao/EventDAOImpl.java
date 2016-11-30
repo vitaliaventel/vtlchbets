@@ -15,7 +15,7 @@ import ua.kpi.leshchenko.connection.Database;
 public class EventDAOImpl implements EventDAO {
 
 	private static Logger logger = Logger.getLogger(EventDAOImpl.class.getName());
-	private final String sqlCreate = "INSERT INTO mydb.event(team1,team2,result,game) VALUES(?,?,?,?)";
+	private final String sqlCreate = "INSERT INTO mydb.event(team1,team2,game) VALUES(?,?,?)";
 	private final String sqlRead = "SELECT * FROM mydb.event WHERE idevent = ";
 	private final String sqlUpdate = "UPDATE mydb.event SET team1=?, team2=?, result=?, game=?, team1value=?, team2value=? WHERE idevent=?";
 	private final String sqlDelete = "DELETE FROM mydb.event WHERE idevent=";
@@ -31,8 +31,7 @@ public class EventDAOImpl implements EventDAO {
 		try (PreparedStatement ps = conn.prepareStatement(sqlCreate)) {
 			ps.setString(1, event.getTeam1());
 			ps.setString(2, event.getTeam2());
-			ps.setString(3, event.getResult());
-			ps.setInt(4, event.getGameType());
+			ps.setInt(3, event.getGameType());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("DB problems create() ", e);

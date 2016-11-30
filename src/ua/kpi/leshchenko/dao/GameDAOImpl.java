@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import ua.kpi.leshchenko.beans.Game;
+import ua.kpi.leshchenko.beans.User;
 import ua.kpi.leshchenko.connection.Database;
 
 public class GameDAOImpl implements GameDAO {
@@ -111,6 +112,28 @@ public class GameDAOImpl implements GameDAO {
 		}
 		logger.info("Successful findAll().");
 		return typesList;
+	}
+
+	@Override
+	public Game findByName(String name) {
+		Game game = new Game();
+		Connection conn = db.getConn();
+		try (PreparedStatement ps = conn.prepareStatement(
+				"SELECT * FROM mydb.game WHERE name = ?")) {
+			ps.setString(1, name);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				game.setIdGame(rs.getInt("idgame"));
+				game.setName(rs.getString("name"));
+			}
+		} catch (Exception e) {
+			logger.error("GameDAO.findByEmail() problems.");
+			return null;
+		} finally {
+			db.returnConnectionToPool(conn);
+		}
+		logger.info("GameDAO.findByEmail() is ok.");
+		return game;
 	}
 
 }

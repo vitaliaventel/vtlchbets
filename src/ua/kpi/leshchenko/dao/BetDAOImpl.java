@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import ua.kpi.leshchenko.beans.Bet;
-import ua.kpi.leshchenko.beans.Event;
 import ua.kpi.leshchenko.connection.Database;
 
 public class BetDAOImpl implements BetDAO {

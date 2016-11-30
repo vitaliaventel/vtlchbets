@@ -15,5 +15,7 @@ public interface GameDAO {
 	boolean delete(int id);
 
 	ArrayList<Game> findAll();
+	
+	Game findByName(String name);
 
 }
