@@ -20,7 +20,7 @@
 		  <div class="container">
 	     	 <center><form name="editprofile" method="POST" action="Controller">
 		      	<input type="hidden" name="command" value ="editprofile"/>
-		      	<input type="text" name="id" value="${id}"  placeholder="Last name" readonly>
+		      	<input type="text" name="id" value="${id}"  placeholder="ID" readonly>
 		      	<br>
 		        <input type="text" name="firstname" value="${name}" placeholder="First name" required>
 		        <br>
