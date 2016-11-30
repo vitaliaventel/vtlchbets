@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 
 import ua.kpi.leshchenko.commands.CommandAcceptBet;
+import ua.kpi.leshchenko.commands.CommandCloseEvent;
 import ua.kpi.leshchenko.commands.CommandEditProfile;
+import ua.kpi.leshchenko.commands.CommandEventCreate;
+import ua.kpi.leshchenko.commands.CommandEventDelete;
 import ua.kpi.leshchenko.commands.CommandLogin;
 import ua.kpi.leshchenko.commands.CommandLogout;
 import ua.kpi.leshchenko.commands.CommandMenu;
@@ -30,6 +33,9 @@ public class CHelper {
 		commands.put("acceptBet", new CommandAcceptBet());
 		commands.put("menu", new CommandMenu());
 		commands.put("editprofile", new CommandEditProfile());
+		commands.put("eventClose", new CommandCloseEvent());
+		commands.put("eventCreate", new CommandEventCreate());
+		commands.put("eventDelete", new CommandEventDelete());
 	}
 
 	public ICommand getCommand(HttpServletRequest request) {
