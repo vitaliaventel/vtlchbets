@@ -21,7 +21,7 @@ public class Config {
 	public static final String MAINLOGGED = "MAINLOGGED";
 	public static final String MODER = "MODER";
 	public static final String HALLOFFAME = "HALLOFFAME";
-	
+	public static final String PROFILEVIEW = "PROFILEVIEW";
 
 	public static Config getInstance() {
 		if (instance == null) {

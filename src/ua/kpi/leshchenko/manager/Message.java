@@ -20,7 +20,8 @@ public class Message {
 	public static final String CREATE_EVENT_ERROR = "CREATE_EVENT_ERROR";
 	public static final String DELETE_EVENT_ERROR = "DELETE_EVENT_ERROR";
 	public static final String DELETE_BET_ERROR = "DELETE_BET_ERROR";
-
+	public static final String ADMIN_VIEW_ERROR = "ADMIN_VIEW_ERROR";
+	
 	public static Message getInstance() {
 		if (instance == null) {
 			instance = new Message();
