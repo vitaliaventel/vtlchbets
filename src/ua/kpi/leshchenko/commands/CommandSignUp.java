@@ -12,6 +12,7 @@ import ua.kpi.leshchenko.beans.User;
 import ua.kpi.leshchenko.dao.DAOFactory;
 import ua.kpi.leshchenko.dao.UserDAO;
 import ua.kpi.leshchenko.manager.Config;
+import ua.kpi.leshchenko.manager.Message;
 
 public class CommandSignUp implements ICommand {
 
@@ -48,12 +49,12 @@ public class CommandSignUp implements ICommand {
 				page = Config.getInstance().getProperty(Config.MAINLOGGED);
 				logger.info("Register new user.");
 			} else {
-				//request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.REGISTER_ERROR));
+				request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.REGISTER_ERROR));
 				page = Config.getInstance().getProperty(Config.ERRORPAGE);
 				logger.info("Current username is already use.");
 			}
 		} catch (NullPointerException e) {
-			//request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.SESSION_END));
+			request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.SESSION_END));
 			page = Config.getInstance().getProperty(Config.ERRORPAGE);
 			logger.error("Session ended ", e);
 		}

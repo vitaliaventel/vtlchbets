@@ -12,6 +12,7 @@ import ua.kpi.leshchenko.beans.User;
 import ua.kpi.leshchenko.dao.DAOFactory;
 import ua.kpi.leshchenko.dao.UserDAO;
 import ua.kpi.leshchenko.manager.Config;
+import ua.kpi.leshchenko.manager.Message;
 
 public class CommandEditProfile implements ICommand {
 
@@ -48,20 +49,17 @@ public class CommandEditProfile implements ICommand {
 				page = Config.getInstance().getProperty(Config.PROFILE);
 				logger.info("User info updated!");
 			} else {
-				// request.getSession().setAttribute("error",
-				// Message.getInstance().getProperty(Message.SESSION_END));
+				request.getSession().setAttribute("error",
+						Message.getInstance().getProperty(Message.UPDATE_USER_ERROR));
 				logger.info("Cant update user info.");
 				throw new Exception();
 			}
 
 		} catch (NullPointerException e) {
-			// request.getSession().setAttribute("error",
-			// Message.getInstance().getProperty(Message.SESSION_END));
+			request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.SESSION_END));
 			page = Config.getInstance().getProperty(Config.ERRORPAGE);
 			logger.error("Session ended ", e);
 		} catch (Exception e) {
-			// request.getSession().setAttribute("error",
-			// Message.getInstance().getProperty(Message.SESSION_END));
 			page = Config.getInstance().getProperty(Config.ERRORPAGE);
 			logger.error("Error ", e);
 		}

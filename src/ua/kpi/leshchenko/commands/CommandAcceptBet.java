@@ -16,6 +16,7 @@ import ua.kpi.leshchenko.dao.DAOFactory;
 import ua.kpi.leshchenko.dao.EventDAO;
 import ua.kpi.leshchenko.dao.UserDAO;
 import ua.kpi.leshchenko.manager.Config;
+import ua.kpi.leshchenko.manager.Message;
 
 public class CommandAcceptBet implements ICommand {
 
@@ -40,9 +41,8 @@ public class CommandAcceptBet implements ICommand {
 			double betValue = Double.parseDouble(request.getParameter(BET));
 			user.setBalance(user.getBalance() - betValue);
 			if (!daoUser.update(user)) {
-				// request.getSession().setAttribute("error",
-				// Message.getInstance().getProperty(Message.LOGIN_ERROR));
-				page = Config.getInstance().getProperty(Config.ERRORPAGE);
+				request.getSession().setAttribute("error",
+						Message.getInstance().getProperty(Message.UPDATE_USER_ERROR));
 				logger.info("Cant update user balance " + user.getEmail());
 				throw new Exception();
 			}
@@ -53,9 +53,8 @@ public class CommandAcceptBet implements ICommand {
 				event.setTeamValue2(event.getTeamValue2() + betValue);
 			}
 			if (!daoEvent.update(event)) {
-				// request.getSession().setAttribute("error",
-				// Message.getInstance().getProperty(Message.LOGIN_ERROR));
-				page = Config.getInstance().getProperty(Config.ERRORPAGE);
+				request.getSession().setAttribute("error",
+						Message.getInstance().getProperty(Message.UPDATE_EVENT_ERROR));
 				logger.info("Cant update event info" + event.getIdEvent());
 				throw new Exception();
 			}
@@ -63,10 +62,8 @@ public class CommandAcceptBet implements ICommand {
 			bet.setEvent(event.getIdEvent());
 			bet.setUser(user.getIdUser());
 			bet.setWinner(winner);
-			if(!daoBet.create(bet)){
-				// request.getSession().setAttribute("error",
-				// Message.getInstance().getProperty(Message.LOGIN_ERROR));
-				page = Config.getInstance().getProperty(Config.ERRORPAGE);
+			if (!daoBet.create(bet)) {
+				request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.CREATE_BET_ERROR));
 				logger.info("Cant create bet, for user " + user.getEmail() + " and event " + event.getIdEvent());
 				throw new Exception();
 			}
@@ -75,8 +72,7 @@ public class CommandAcceptBet implements ICommand {
 			page = Config.getInstance().getProperty(Config.MAINLOGGED);
 			logger.info("Successful bet for user " + user.getEmail());
 		} catch (NullPointerException e) {
-			// request.getSession().setAttribute("error",
-			// Message.getInstance().getProperty(Message.SESSION_END));
+			request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.SESSION_END));
 			page = Config.getInstance().getProperty(Config.ERRORPAGE);
 			logger.error("Session ended ", e);
 		} catch (Exception e) {

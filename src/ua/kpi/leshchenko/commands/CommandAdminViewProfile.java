@@ -40,6 +40,7 @@ public class CommandAdminViewProfile implements ICommand {
 			page = Config.getInstance().getProperty(Config.ERRORPAGE);
 			logger.error("Session ended ", e);
 		} catch (Exception e) {
+			request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.ADMIN_VIEW_ERROR));
 			page = Config.getInstance().getProperty(Config.ERRORPAGE);
 			logger.error("Something wrong ", e);
 		}

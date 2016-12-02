@@ -17,6 +17,7 @@ import ua.kpi.leshchenko.dao.DAOFactory;
 import ua.kpi.leshchenko.dao.EventDAO;
 import ua.kpi.leshchenko.dao.UserDAO;
 import ua.kpi.leshchenko.manager.Config;
+import ua.kpi.leshchenko.manager.Message;
 
 public class CommandCloseEvent implements ICommand {
 
@@ -38,9 +39,7 @@ public class CommandCloseEvent implements ICommand {
 			Event event = daoEvent.read(id);
 			event.setResult(winner);
 			if (!daoEvent.update(event)) {
-				// request.getSession().setAttribute("error",
-				// Message.getInstance().getProperty(Message.LOGIN_ERROR));
-				page = Config.getInstance().getProperty(Config.ERRORPAGE);
+				request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.UPDATE_EVENT_ERROR));
 				logger.info("Cant update event info" + event.getIdEvent());
 				throw new Exception();
 			}
@@ -59,9 +58,8 @@ public class CommandCloseEvent implements ICommand {
 					User us = daoUser.read(b.getUser());
 					us.setBalance(us.getBalance() + b.getBetValue() * coeffiecient);
 					if (!daoUser.update(us)) {
-						// request.getSession().setAttribute("error",
-						// Message.getInstance().getProperty(Message.LOGIN_ERROR));
-						page = Config.getInstance().getProperty(Config.ERRORPAGE);
+						 request.getSession().setAttribute("error",
+						 Message.getInstance().getProperty(Message.UPDATE_USER_ERROR));
 						logger.info("Cant update user info" + us.getEmail());
 						throw new Exception();
 					}
@@ -70,8 +68,7 @@ public class CommandCloseEvent implements ICommand {
 			page = Config.getInstance().getProperty(Config.MODER);
 			logger.info("Successful event close " + event.getIdEvent());
 		} catch (NullPointerException e) {
-			// request.getSession().setAttribute("error",
-			// Message.getInstance().getProperty(Message.SESSION_END));
+			request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.SESSION_END));
 			page = Config.getInstance().getProperty(Config.ERRORPAGE);
 			logger.error("Session ended ", e);
 		} catch (Exception e) {

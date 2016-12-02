@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import ua.kpi.leshchenko.manager.Config;
+import ua.kpi.leshchenko.manager.Message;
 
 public class CommandLogout implements ICommand {
 
@@ -23,7 +24,7 @@ public class CommandLogout implements ICommand {
 			request.getSession(false).invalidate();
 			logger.info("Logging out.");
 		} catch (NullPointerException e) {
-			//request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.SESSION_END));
+			request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.SESSION_END));
 			page = Config.getInstance().getProperty(Config.ERRORPAGE);
 			logger.error("Session ended ", e);
 		}

@@ -14,6 +14,7 @@ import ua.kpi.leshchenko.dao.DAOFactory;
 import ua.kpi.leshchenko.dao.EventDAO;
 import ua.kpi.leshchenko.dao.GameDAO;
 import ua.kpi.leshchenko.manager.Config;
+import ua.kpi.leshchenko.manager.Message;
 
 public class CommandEventCreate implements ICommand {
 
@@ -39,6 +40,7 @@ public class CommandEventCreate implements ICommand {
 			event.setTeam2(team2);
 			event.setGameType(game.getIdGame());
 			if (!daoEvent.create(event)) {
+				request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.CREATE_EVENT_ERROR));
 				logger.info("Create event fail");
 				throw new Exception();
 			}
@@ -46,13 +48,10 @@ public class CommandEventCreate implements ICommand {
 			logger.info("Create event");
 
 		} catch (NullPointerException e) {
-			// request.getSession().setAttribute("error",
-			// Message.getInstance().getProperty(Message.SESSION_END));
+			request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.SESSION_END));
 			page = Config.getInstance().getProperty(Config.ERRORPAGE);
 			logger.error("Session ended ", e);
 		} catch (Exception e) {
-			// request.getSession().setAttribute("error",
-			// Message.getInstance().getProperty(Message.SESSION_END));
 			page = Config.getInstance().getProperty(Config.ERRORPAGE);
 			logger.error("Something wrong ", e);
 		}

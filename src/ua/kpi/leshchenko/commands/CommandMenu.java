@@ -13,6 +13,7 @@ import ua.kpi.leshchenko.dao.BetDAO;
 import ua.kpi.leshchenko.dao.DAOFactory;
 import ua.kpi.leshchenko.dao.UserDAO;
 import ua.kpi.leshchenko.manager.Config;
+import ua.kpi.leshchenko.manager.Message;
 
 public class CommandMenu implements ICommand {
 
@@ -44,6 +45,7 @@ public class CommandMenu implements ICommand {
 				page = Config.getInstance().getProperty(Config.MODER);
 				logger.info("Go to moder.jsp");
 			} else if (menu.equals("admin")) {
+				request.getSession(false).setAttribute("users", daoUser.findAll());
 				page = Config.getInstance().getProperty(Config.ADMIN);
 				logger.info("Go to admin.jsp");
 			} else if (menu.equals("about")) {
@@ -62,13 +64,10 @@ public class CommandMenu implements ICommand {
 				logger.info("Go to profile.jsp");
 			}
 		} catch (NullPointerException e) {
-			// request.getSession().setAttribute("error",
-			// Message.getInstance().getProperty(Message.SESSION_END));
+			request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.SESSION_END));
 			page = Config.getInstance().getProperty(Config.ERRORPAGE);
 			logger.error("Session ended ", e);
 		} catch (Exception e) {
-			// request.getSession().setAttribute("error",
-			// Message.getInstance().getProperty(Message.SESSION_END));
 			page = Config.getInstance().getProperty(Config.ERRORPAGE);
 			logger.error("Something wrong ", e);
 		}

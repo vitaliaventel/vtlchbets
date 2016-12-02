@@ -17,6 +17,7 @@ import ua.kpi.leshchenko.dao.DAOFactory;
 import ua.kpi.leshchenko.dao.EventDAO;
 import ua.kpi.leshchenko.dao.UserDAO;
 import ua.kpi.leshchenko.manager.Config;
+import ua.kpi.leshchenko.manager.Message;
 
 public class CommandEventDelete implements ICommand {
 
@@ -40,16 +41,22 @@ public class CommandEventDelete implements ICommand {
 					user = daoUser.read(bet.getUser());
 					user.setBalance(bet.getBetValue() + user.getBalance());
 					if (!daoUser.update(user)) {
+						request.getSession().setAttribute("error",
+								Message.getInstance().getProperty(Message.UPDATE_USER_ERROR));
 						logger.info("Update user fail " + user.getEmail());
 						throw new Exception();
 					}
 					if (!daoBet.delete(bet.getIdBet())) {
+						request.getSession().setAttribute("error",
+								Message.getInstance().getProperty(Message.DELETE_BET_ERROR));
 						logger.info("Delete bet fail " + bet.getIdBet());
 						throw new Exception();
 					}
 				}
 			}
 			if (!daoEvent.delete(id)) {
+				request.getSession().setAttribute("error",
+						Message.getInstance().getProperty(Message.DELETE_EVENT_ERROR));
 				logger.info("Delete event fail");
 				throw new Exception();
 			}
@@ -57,13 +64,10 @@ public class CommandEventDelete implements ICommand {
 			logger.info("Create event");
 
 		} catch (NullPointerException e) {
-			// request.getSession().setAttribute("error",
-			// Message.getInstance().getProperty(Message.SESSION_END));
+			request.getSession().setAttribute("error", Message.getInstance().getProperty(Message.SESSION_END));
 			page = Config.getInstance().getProperty(Config.ERRORPAGE);
 			logger.error("Session ended ", e);
 		} catch (Exception e) {
-			// request.getSession().setAttribute("error",
-			// Message.getInstance().getProperty(Message.SESSION_END));
 			page = Config.getInstance().getProperty(Config.ERRORPAGE);
 			logger.error("Something wrong ", e);
 		}
