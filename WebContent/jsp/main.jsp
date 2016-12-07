@@ -1,15 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="ua.kpi.leshchenko.i18n.text" />
+<html lang="${language }">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link href="css/jumbotron.css" rel="stylesheet">
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<title>VTLCHBets main page</title>
+<title><fmt:message key="main.title"></fmt:message></title>
 </head>
 <body>
 
@@ -17,18 +21,18 @@
 
 	<div class="jumbotron">
 		<div class="container">
-			<h1>VTLCH eSport bets</h1>
+			<h1><fmt:message key="main.welcometitle"></fmt:message></h1>
 			<div class="panel panel-success">
-				<div class="panel-heading">UPCOMING EVENTS</div>
+				<div class="panel-heading"><fmt:message key="panel.success.head"></fmt:message></div>
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>Game</th>
-							<th>Team 1</th>
-							<th>Value</th>
-							<th>Team 2</th>
-							<th>Value</th>
-							<th>Result</th>
+							<th><fmt:message key="table.game"></fmt:message></th>
+							<th><fmt:message key="table.team1"></fmt:message></th>
+							<th><fmt:message key="table.value"></fmt:message></th>
+							<th><fmt:message key="table.team2"></fmt:message></th>
+							<th><fmt:message key="table.value"></fmt:message></th>
+							<th><fmt:message key="table.result"></fmt:message></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -47,16 +51,16 @@
 			</div>
 			
 			<div class="panel panel-danger">
-				<div class="panel-heading">FINISHED EVENTS</div>
+				<div class="panel-heading"><fmt:message key="panel.danger.head"></fmt:message></div>
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>Game</th>
-							<th>Team 1</th>
-							<th>Value</th>
-							<th>Team 2</th>
-							<th>Value</th>
-							<th>Result</th>
+							<th><fmt:message key="table.game"></fmt:message></th>
+							<th><fmt:message key="table.team1"></fmt:message></th>
+							<th><fmt:message key="table.value"></fmt:message></th>
+							<th><fmt:message key="table.team2"></fmt:message></th>
+							<th><fmt:message key="table.value"></fmt:message></th>
+							<th><fmt:message key="table.result"></fmt:message></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -83,67 +87,25 @@
 				<h2>
 					<img src="img/dotalogo.jpg" class="img-rounded">
 				</h2>
-				<p>Dota 2 is a free-to-play multiplayer online battle arena
-					(MOBA) video game developed and published by Valve Corporation for
-					Microsoft Windows, OS X, and Linux. The game is the stand-alone
-					sequel to Defense of the Ancients (DotA), which was a
-					community-created mod for Warcraft III: Reign of Chaos and its
-					expansion pack, The Frozen Throne.</p>
-				<button data-toggle="collapse" data-target="#dota">View
-					details &raquo;</button>
-				<div id="dota" class="collapse">Dota 2 is played in matches
-					between two teams that consist of five players, with both teams
-					occupying their own separate base on the map. Each of the ten
-					players independently control a powerful character, known as a
-					"hero", that all feature unique abilities and different styles of
-					play. During a match, a player and their team collects experience
-					points and items for their heroes in order to push through the
-					opposing team's defenses. A team wins by being the first to destroy
-					a large structure located in the opposing team's base, called the
-					"Ancient".</div>
+				<p><fmt:message key="dota2.info1"></fmt:message></p>
+				<button data-toggle="collapse" data-target="#dota"><fmt:message key="button.collapse"></fmt:message> &raquo;</button>
+				<div id="dota" class="collapse"><fmt:message key="dota2.info2"></fmt:message></div>
 			</div>
 			<div class="col-md-4">
 				<h2>
 					<img src="img/csgologo.jpg" class="img-rounded">
 				</h2>
-				<p>Counter-Strike: Global Offensive (CS:GO) is a multiplayer
-					first-person shooter video game developed by Hidden Path
-					Entertainment and Valve Corporation. It is the fourth game in the
-					main Counter-Strike franchise. Counter-Strike: Global Offensive was
-					released for Microsoft Windows, OS X, Xbox 360, and PlayStation 3
-					in August 2012,[1] with the Linux version being released in
-					September 2014.</p>
-				<button data-toggle="collapse" data-target="#csgo">View
-					details &raquo;</button>
-				<div id="csgo" class="collapse">Players play as Terrorists or
-					Counter Terrorists, and must complete objectives while attempting
-					to eliminate the enemy team. Players purchase weapons and equipment
-					at the beginning of every round with money awarded based on their
-					performance. Completing objectives such as planting the bomb or
-					killing an enemy earns players money, but negative actions, such as
-					friendly fire towards a teammate or hostage will result in monetary
-					penalty. In addition, when a round ends all players receive some
-					amount of money, with players on the winning team receiving
-					substantially more.</div>
+				<p><fmt:message key="csgo.info1"></fmt:message></p>
+				<button data-toggle="collapse" data-target="#csgo"><fmt:message key="button.collapse"></fmt:message> &raquo;</button>
+				<div id="csgo" class="collapse"><fmt:message key="csgo.info2"></fmt:message></div>
 			</div>
 			<div class="col-md-4">
 				<h2>
 					<img src="img/hslogo.png" class="img-rounded">
 				</h2>
-				<p>Hearthstone: Heroes of Warcraft is a free-to-play online
-					collectible card video game developed and published by Blizzard
-					Entertainment, released worldwide on March 11, 2014 . Hearthstone
-					builds upon the lore of the Warcraft series, using characters,
-					creatures, and relics from the series.</p>
-				<button data-toggle="collapse" data-target="#hs">View
-					details &raquo;</button>
-				<div id="hs" class="collapse">The game is a turn-based card
-					game between two opponents, using constructed decks of thirty cards
-					along with a selected hero with a unique power. Players use mana
-					points to cast spells or summon minions to attack the opponent,
-					with the goal to reduce the opponent's health to zero. Winning
-					matches can earn in-game gold, rewards in the form of new cards,
-					and other in-game prizes.</div>
+				<p><fmt:message key="hs.info1"></fmt:message></p>
+				<button data-toggle="collapse" data-target="#hs"><fmt:message key="button.collapse"></fmt:message> &raquo;</button>
+				<div id="hs" class="collapse"><fmt:message key="hs.info2"></fmt:message></div>
 			</div>
 		</div>
 

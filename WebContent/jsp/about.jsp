@@ -1,18 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="ua.kpi.leshchenko.i18n.text" />
+<html lang="${language }">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link href="css/jumbotron.css" rel="stylesheet">
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<title>VTLCHBets about</title>
+<title><fmt:message key="menu.about"></fmt:message></title>
 </head>
 <body>
-
 
 	<c:choose>
 	    <c:when test="${type > '0'}">
@@ -26,28 +29,24 @@
 	<div class="jumbotron">
 		<div class="container">
 			<h2>
-			This project was created specifically to support e-sport, and it is intended to increase interest
-			 in matches that are held as part of the biggest tournaments and leagues in the world.
-			 On our pages you can locate the matches that you are interested in, and after the matches
-			  end you can find out the exact result as recorded by the organizers.
+			<fmt:message key="about.info"></fmt:message>
 			<br/>
 			<br/>
-			Zip: 02121
+			<fmt:message key="about.zip"></fmt:message>
 			<br/>
-			City: Kyiv
+			<fmt:message key="about.city"></fmt:message>
 			<br/>
-			Country: Ukraine
+			<fmt:message key="about.country"></fmt:message>
 			<br/>
-			Address: From Maidan 125 meters south, second house on the right  
-			Activities are performed in accordance with laws of Ukraine  
+			<fmt:message key="about.adress"></fmt:message> 
 			<br/>
-			tel: +3 9230 1299 32
+			<fmt:message key="about.phone"></fmt:message>
 			<br/>
 			<br/>
 			</h2>
 			
 			<hr/>
-			<center><h2><strong>Good luck with the bets!</strong></h2></center>
+			<center><h2><strong><fmt:message key="about.hf"></fmt:message></strong></h2></center>
 		</div>
 	</div>
 

@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="ua.kpi.leshchenko.i18n.text" />
+<html lang="${language }">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -14,38 +18,38 @@
 		document.eventClose.id.value=id;
 	}
 </script>
-<title>Moderator page</title>
+<title><fmt:message key="moder.title"></fmt:message></title>
 </head>
 <body>
 	
 	<jsp:include page="header.jsp"></jsp:include>
 	
 	<div class="jumbotron">
-	<center><h2>Event create menu</h2>
+	<center><h2><fmt:message key="moder.createmenu"></fmt:message></h2>
 	 			<form name="eventCreate" method="POST" action="Controller">
 				  <input type="hidden" name="command" value = "eventCreate"/>
-			        <input type="text" name="team1" placeholder="Team 1 name" required>
+			        <input type="text" name="team1" placeholder=<fmt:message key="table.team1"></fmt:message> required oninvalid="this.setCustomValidity('<fmt:message key="error.empty"></fmt:message>')" oninput="setCustomValidity('')">
 			        <br>
-			        <input type="text" name="team2" placeholder="Team 2 name" required>
+			        <input type="text" name="team2" placeholder=<fmt:message key="table.team2"></fmt:message> required oninvalid="this.setCustomValidity('<fmt:message key="error.empty"></fmt:message>')" oninput="setCustomValidity('')">
 			        <br>
-			        <input type="text" name="gameName" placeholder="Game name" required>
+			        <input type="text" name="gameName" placeholder=<fmt:message key="moder.gamename"></fmt:message> requiredoninvalid="this.setCustomValidity('<fmt:message key="error.empty"></fmt:message>')" oninput="setCustomValidity('')">
 			        <br>
-				  <button type="submit" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-plus"></span>New event</button>
+				  <button type="submit" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-plus"></span><fmt:message key="moder.newevent"></fmt:message></button>
     		  </form>
     		  </center>
-			<center><h1>Events list</h1></center>
+			<center><h1><fmt:message key="moder.eventlist"></fmt:message></h1></center>
 		 			<div class="panel panel-success">
-				<div class="panel-heading">OPEN EVENTS</div>
+				<div class="panel-heading"><fmt:message key="moder.open"></fmt:message></div>
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>Match ID</th>
-							<th>Game</th>
-							<th>Team 1</th>
-							<th>Value</th>
-							<th>Team 2</th>
-							<th>Value</th>
-							<th>Result</th>
+							<th><fmt:message key="table.id"></fmt:message></th>
+							<th><fmt:message key="table.game"></fmt:message></th>
+							<th><fmt:message key="table.team1"></fmt:message></th>
+							<th><fmt:message key="table.value"></fmt:message></th>
+							<th><fmt:message key="table.team2"></fmt:message></th>
+							<th><fmt:message key="table.value"></fmt:message></th>
+							<th><fmt:message key="table.result"></fmt:message></th>
 							<th></th>
 						</tr>
 					</thead>
@@ -78,23 +82,23 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Event update</h4>
+							<h4 class="modal-title"><fmt:message key="eventmodal.title"></fmt:message></h4>
 						</div>
 						<div class="modal-body">
-							Close event dialog, match id:
+							<fmt:message key="eventmodal.head"></fmt:message>
 							<form name="eventClose" method="POST" action="Controller">
 								<input type="hidden" name="command" value="eventClose" />
 								<input type="text" name="id" value="" readonly/> 
 								<hr>
 								<label class="radio-inline">
-									<input type="radio" name="winner" value="team1" required> team1</label> 
+									<input type="radio" name="winner" value="team1" required> <fmt:message key="table.team1"></fmt:message></label> 
 								<label class="radio-inline">
-									<input type="radio" name="winner" value="team2" required>team2</label>
-								<button class="btn btn-sm btn-primary" type="submit">Accept</button>
+									<input type="radio" name="winner" value="team2" required><fmt:message key="table.team2"></fmt:message></label>
+								<button class="btn btn-sm btn-primary" type="submit"><fmt:message key="button.accept"></fmt:message></button>
 							</form>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message key="button.close"></fmt:message></button>
 						</div>
 					</div>
 
@@ -103,17 +107,17 @@
 
 
 			<div class="panel panel-danger">
-				<div class="panel-heading">CLOSED EVENTS</div>
+				<div class="panel-heading"><fmt:message key="moder.closed"></fmt:message></div>
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>Match ID</th>
-							<th>Game</th>
-							<th>Team 1</th>
-							<th>Value</th>
-							<th>Team 2</th>
-							<th>Value</th>
-							<th>Result</th>
+							<th><fmt:message key="table.id"></fmt:message></th>
+							<th><fmt:message key="table.game"></fmt:message></th>
+							<th><fmt:message key="table.team1"></fmt:message></th>
+							<th><fmt:message key="table.value"></fmt:message></th>
+							<th><fmt:message key="table.team2"></fmt:message></th>
+							<th><fmt:message key="table.value"></fmt:message></th>
+							<th><fmt:message key="table.result"></fmt:message></th>
 							<th></th>
 						</tr>
 					</thead>
